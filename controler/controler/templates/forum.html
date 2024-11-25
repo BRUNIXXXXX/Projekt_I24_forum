@@ -1,0 +1,51 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Engineers Forum</title>
+    <link rel="stylesheet" href="{% static "controler/style.css" %}">
+</head>
+<body>
+    <header>
+        <h1>Network Engineers Forum</h1>
+        <p>Discuss everything about networking, protocols, and systems!</p>
+    </header>
+
+    <main>
+        <!-- Form to add new posts -->
+        <section class="new-post">
+            <h2>Create a New Post</h2>
+            <form id="postForm">
+                <label for="username">Your Name:</label>
+                <input type="text" id="username" placeholder="Enter your name" required>
+                
+                <label for="topic">Post Title:</label>
+                <input type="text" id="topic" placeholder="Enter post title" required>
+                
+                <label for="message">Post Content:</label>
+                <textarea id="message" rows="5" placeholder="Enter your message" required></textarea>
+                
+                <button type="submit">Post</button>
+            </form>
+        </section>
+
+        <!-- Section to display posts -->
+        <section class="posts">
+            <h2>Forum Discussions</h2>
+            <div id="postContainer">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Network Engineers Forum | Designed for professionals</p>
+    </footer>
+
+    <script src="{% static "controler/script.js" %}"></script>
+</body>
+</html>
