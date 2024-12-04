@@ -11,10 +11,12 @@
 </head>
 <body>
     <header>
-        <h1>Forum Piwnych Smakoszy</h1>
-        <p>Forum o tematyce piwa; piwo piwo to moje paliwo 🍺</p>
+        <h1>Forum Żydowskie</h1>
+        <p>Forum o tematyce judaizmu ~falling change money sound ✡️🕎</p>
     </header>
-
+    <div id="overlay"><img src="{% static "controler/jew.png" %}">
+        <audio id="background-audio" autoplay loop>
+            <source src="{% static "controler/jewmusic.mp3" %}" type="audio/mp3"></audio>
     <main>
         <!-- Form to add new posts -->
         <section class="new-post">
@@ -35,7 +37,7 @@
 
         <!-- Section to display posts -->
         <section class="posts">
-            <h2>Dyskusje na forum</h2>
+            <h2>Dyskusje na forum i długi</h2>
             <div id="postContainer">
                 <!-- Posts will be dynamically loaded here -->
             </div>
@@ -46,8 +48,11 @@
         </div>
     </main>
 
+    </div>
+</body>
+
     <footer>
-        <p>&copy; 2024 Forum Piwnych Smakoszy | 👍🍺🍻</p>
+        <p>&copy; Jewish Forum | 🕎✡️</p>
     </footer>
 
     <script src="{% static "controler/script.js" %}"></script>
