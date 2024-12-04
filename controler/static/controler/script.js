@@ -22,8 +22,13 @@ function addCommentToDOM(comment) {
         <h3>${comment.topic}</h3>
         <p class="meta">By ${comment.username} on ${comment.date}</p>
         <p>${comment.message}</p>
+        <button class="reply-btn" data-id="${comment.id}">Reply</button>
+        <button class="delete-btn" data-id="${comment.id}">Delete</button>
     `;
     postContainer.prepend(postElement);
+
+    postElement.querySelector('.reply-btn').addEventListener('click', handleReply);
+    postElement.querySelector('.delete-btn').addEventListener('click', handleDelete);
 }
 
 // Submit a new comment
@@ -65,4 +70,47 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+
+function handleReply(event) {
+    const commentId = event.target.dataset.id;
+    const replyMessage = prompt("Enter your reply:");
+
+    if (replyMessage) {
+        fetch(`/api/comments/${commentId}/reply/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({ 
+                username: "Anonymous",  // You can enhance with logged-in user's name
+                message: replyMessage 
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            loadComments();  // Reload comments to include the new reply
+        });
+    }
+}
+
+function handleDelete(event) {
+    const commentId = event.target.dataset.id;
+
+    if (confirm("Are you sure you want to delete this comment?")) {
+        fetch(`/api/comments/${commentId}/delete/`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            loadComments();  // Reload comments to reflect deletion
+        });
+    }
 }

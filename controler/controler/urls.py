@@ -23,4 +23,6 @@ urlpatterns = [
     path('forum/', views.forum, name='forum'),
     path('api/comments/', views.get_comments, name='get_comments'),
     path('api/comments/add/', views.add_comment, name='add_comment'),
+    path('api/comments/<int:comment_id>/reply/', views.add_reply, name='add_reply'),
+    path('api/comments/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
 ]

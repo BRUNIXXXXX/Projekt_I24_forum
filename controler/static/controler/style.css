@@ -106,3 +106,22 @@ footer {
     margin-top: 20px;
     font-size: 0.9em;
 }
+
+.post button {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.post button.delete-btn {
+    background-color: #f44336;
+}
+
+.post button:hover {
+    opacity: 0.9;
+}
