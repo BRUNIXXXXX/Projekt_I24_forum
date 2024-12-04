@@ -20,11 +20,14 @@ function addCommentToDOM(comment) {
     postElement.classList.add('post');
     postElement.innerHTML = `
         <h3>${comment.topic}</h3>
-        <p class="meta">By ${comment.username} on ${comment.date}</p>
+        <p class="meta">Przez ${comment.username} -> ${comment.date}</p>
         <p>${comment.message}</p>
-        <button class="reply-btn" data-id="${comment.id}">Reply</button>
-        <button class="delete-btn" data-id="${comment.id}">Delete</button>
+        <button class="reply-btn" data-id="${comment.id}">Odpowiedz</button>
+        <button class="delete-btn" data-id="${comment.id}">Usuń</button>
     `;
+    if(!(comment.username == "Anonymous")) {
+        postElement.style.backgroundColor = "#DFF5FF";
+    }
     postContainer.prepend(postElement);
 
     postElement.querySelector('.reply-btn').addEventListener('click', handleReply);
@@ -95,6 +98,7 @@ function handleReply(event) {
             loadComments();  // Reload comments to include the new reply
         });
     }
+    const rep = document.querySelector("")
 }
 
 function handleDelete(event) {

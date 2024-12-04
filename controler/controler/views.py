@@ -16,6 +16,7 @@ def get_comments(request):
                 "username": comment.username,
                 "topic": comment.topic,
                 "message": comment.message,
+                "id": comment.id,
                 "date": comment.date_posted.strftime("%Y-%m-%d %H:%M:%S"),
             }
             for comment in comments
@@ -40,7 +41,10 @@ def add_comment(request):
 def add_reply(request, comment_id):
     if request.method == "POST":
         data = json.loads(request.body)
-        parent_comment = get_object_or_404(Comment, id=comment_id)
+        try:
+            parent_comment = Comment.objects.get(id=comment_id)
+        except:
+            raise Http404("Comment not found")
         reply = Comment.objects.create(
             username=data.get("username"),
             topic=parent_comment.topic,  # Inherit topic from parent
@@ -53,6 +57,9 @@ def add_reply(request, comment_id):
 @csrf_exempt
 def delete_comment(request, comment_id):
     if request.method == "DELETE":
-        comment = get_object_or_404(Comment, id=comment_id)
+        try:
+            comment = Comment.objects.get(id=comment_id)
+        except Comment.DoesNotExist:
+            raise Http404("Comment not found")
         comment.delete()
         return JsonResponse({"message": "Comment deleted successfully!"})
